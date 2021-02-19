@@ -9,6 +9,7 @@ import connectDB from "./config/db.js";
 
 // Import routes
 import userRoutes from "./routes/users.js";
+import contactRoutes from "./routes/contacts.js";
 
 // import middleware
 import { notFound, errorHandler } from "./middleware/error.js";
@@ -31,6 +32,7 @@ if (process.env.NODE_ENV === "development") {
 
 // routes
 app.use("/api/a1/users", userRoutes);
+app.use("/api/a1/contacts", contactRoutes);
 
 // error middlewares
 app.use(notFound);
