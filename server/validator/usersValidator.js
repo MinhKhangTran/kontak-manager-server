@@ -5,3 +5,8 @@ export const registerValidator = [
   check("email", "Email ist nötig").isEmail(),
   check("password", "Passwort ist nötig").isLength({ min: 6 }),
 ];
+
+export const loginValidator = [
+  check("email", "Email ist nötig").isEmail(),
+  check("password", "Passwort ist nötig").isLength({ min: 6 }),
+];
