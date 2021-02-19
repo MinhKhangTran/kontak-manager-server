@@ -4,10 +4,20 @@ import morgan from "morgan";
 import cors from "cors";
 import dotenv from "dotenv";
 
+// import DB
+import connectDB from "./config/db.js";
+
+// Import routes
+import userRoutes from "./routes/users.js";
+
+// import middleware
+import { notFound, errorHandler } from "./middleware/error.js";
+
 // config .env
 dotenv.config();
 
 // connect DB
+connectDB();
 
 // init app
 const app = express();
@@ -20,9 +30,14 @@ if (process.env.NODE_ENV === "development") {
 }
 
 // routes
+app.use("/api/a1/users", userRoutes);
+
+// error middlewares
+app.use(notFound);
+app.use(errorHandler);
 
 // Listen
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  `Server rennt auf Port ${PORT}`.cyan.bold;
+  console.log(`Server rennt auf Port ${PORT}`.cyan.bold);
 });
