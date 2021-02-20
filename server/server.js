@@ -31,8 +31,8 @@ if (process.env.NODE_ENV === "development") {
 }
 
 // routes
-app.use("/api/a1/users", userRoutes);
-app.use("/api/a1/contacts", contactRoutes);
+app.use("/api/a1/users", cors(), userRoutes);
+app.use("/api/a1/contacts", cors(), contactRoutes);
 
 // error middlewares
 app.use(notFound);
