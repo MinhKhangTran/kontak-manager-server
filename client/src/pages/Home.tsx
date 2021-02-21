@@ -5,9 +5,19 @@ import React from "react";
 import Login from "../components/Login";
 import Register from "../components/Register";
 
+// redux
+import { useSelector } from "react-redux";
+import { RootStore } from "../store";
+
 const Home = () => {
   const [register, setRegister] = React.useState(false);
+  const users = useSelector((state: RootStore) => state.users);
 
+  // console.log(users);
+
+  if (users.user?._id.length !== 0) {
+    return <Box>Ich bin eingelogget yay!</Box>;
+  }
   return (
     <Box
       bgGradient="linear(to-br,teal.50,cyan.100)"

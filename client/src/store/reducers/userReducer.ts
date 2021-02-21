@@ -1,9 +1,49 @@
-export interface IUserState {}
+export interface IUserState {
+  user: IUser;
+  loading: boolean;
+  error: string;
+}
 
-export type TUserAction = { type: string; payload?: any };
+export interface IUser {
+  _id: string;
+  email: string;
+  token: string;
+  success: boolean;
+}
 
-const reducer = (state: IUserState = {}, action: TUserAction) => {
+const initState = {
+  loading: false,
+  error: "",
+  user: {
+    _id: "",
+    email: "",
+    token: "",
+    success: false,
+  },
+};
+
+export type TUserAction =
+  | { type: "REGISTER"; payload: IUser }
+  | { type: "LOGIN"; payload: IUser }
+  | { type: "LOADING" }
+  | { type: "FAIL"; payload: string }
+  | { type: "LOGOUT" };
+
+const reducer = (state: IUserState = initState, action: TUserAction) => {
   switch (action.type) {
+    case "REGISTER":
+    case "LOGIN": {
+      return { ...state, loading: false, user: action.payload };
+    }
+    case "LOADING": {
+      return { ...state, loading: true };
+    }
+    case "FAIL": {
+      return { ...state, loading: false, error: action.payload };
+    }
+    case "LOGOUT": {
+      return { ...initState };
+    }
     default:
       return state;
   }

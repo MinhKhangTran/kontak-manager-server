@@ -8,8 +8,15 @@ import {
 import React from "react";
 import { useFormik, FormikHelpers } from "formik";
 import * as Yup from "yup";
+import { RootStore } from "../store";
+// Redux
+import { useDispatch, useSelector } from "react-redux";
+// Redux actions
+import { login } from "../store/actions/userActions";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const { loading, error } = useSelector((state: RootStore) => state.users);
   const formik = useFormik({
     initialValues: { email: "", password: "" },
     validationSchema: Yup.object({
@@ -19,7 +26,7 @@ const Login = () => {
       password: Yup.string().required("Bitte geben Ihr Passwort ein"),
     }),
     onSubmit: (daten, { resetForm }) => {
-      console.log(daten);
+      dispatch(login(daten));
       resetForm();
     },
   });
@@ -52,7 +59,7 @@ const Login = () => {
         />
         <FormErrorMessage>{formik.errors.password}</FormErrorMessage>
       </FormControl>
-      <Button type="submit" colorScheme="teal" mt={8}>
+      <Button isLoading={loading} type="submit" colorScheme="teal" mt={8}>
         Einloggen
       </Button>
     </form>
