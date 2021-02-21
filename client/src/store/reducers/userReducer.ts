@@ -14,6 +14,7 @@ export interface IUser {
 const initState = {
   loading: false,
   error: "",
+
   user: {
     _id: "",
     email: "",
@@ -26,7 +27,7 @@ export type TUserAction =
   | { type: "REGISTER"; payload: IUser }
   | { type: "LOGIN"; payload: IUser }
   | { type: "LOADING" }
-  | { type: "FAIL"; payload: string }
+  | { type: "FAIL" }
   | { type: "LOGOUT" };
 
 const reducer = (state: IUserState = initState, action: TUserAction) => {
@@ -39,7 +40,7 @@ const reducer = (state: IUserState = initState, action: TUserAction) => {
       return { ...state, loading: true };
     }
     case "FAIL": {
-      return { ...state, loading: false, error: action.payload };
+      return { ...state, loading: false };
     }
     case "LOGOUT": {
       return { ...initState };

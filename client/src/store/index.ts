@@ -20,12 +20,10 @@ const userInfoFromLocalStorage = (): IUser => {
 };
 
 interface IInitState {
-  contacts: any;
   users: any;
 }
 
 const initState: IInitState = {
-  contacts: {},
   users: { user: userInfoFromLocalStorage() },
 };
 
