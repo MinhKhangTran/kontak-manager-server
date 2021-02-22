@@ -7,6 +7,9 @@ export interface IContact {
 export interface IContactState {
   contact: IContact;
   loading: boolean;
+  contacts?: {
+    data: IContact[];
+  };
 }
 
 const initState = {
@@ -17,14 +20,21 @@ const initState = {
     phone: 0,
     type: "privat",
   },
+  contacts: {
+    data: [],
+  },
 };
 
 export type TContactAction =
   | { type: "ADDING"; payload: IContact }
   | { type: "CONTACT_LOADING" }
-  | { type: "CONTACT_FAIL" };
+  | { type: "CONTACT_FAIL" }
+  | { type: "FETCHING_CONTACTS"; payload: IContact[] };
 
-const reducer = (state: IContactState = initState, action: TContactAction) => {
+const reducer = (
+  state: IContactState = initState,
+  action: TContactAction
+): IContactState => {
   switch (action.type) {
     case "CONTACT_LOADING": {
       return { ...state, loading: true };
@@ -34,6 +44,9 @@ const reducer = (state: IContactState = initState, action: TContactAction) => {
     }
     case "CONTACT_FAIL": {
       return { ...state, loading: false };
+    }
+    case "FETCHING_CONTACTS": {
+      return { ...state, loading: false, contacts: { data: action.payload } };
     }
 
     default:
