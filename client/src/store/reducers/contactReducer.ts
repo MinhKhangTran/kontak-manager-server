@@ -3,13 +3,12 @@ export interface IContact {
   email: string;
   phone?: number;
   type: string;
+  _id?: string;
 }
 export interface IContactState {
   contact: IContact;
   loading: boolean;
-  contacts?: {
-    data: IContact[];
-  };
+  contacts?: IContact[];
 }
 
 const initState = {
@@ -20,9 +19,7 @@ const initState = {
     phone: 0,
     type: "privat",
   },
-  contacts: {
-    data: [],
-  },
+  contacts: [],
 };
 
 export type TContactAction =
@@ -46,7 +43,7 @@ const reducer = (
       return { ...state, loading: false };
     }
     case "FETCHING_CONTACTS": {
-      return { ...state, loading: false, contacts: { data: action.payload } };
+      return { ...state, loading: false, contacts: action.payload };
     }
 
     default:
