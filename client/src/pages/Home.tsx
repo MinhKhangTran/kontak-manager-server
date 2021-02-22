@@ -4,6 +4,7 @@ import React from "react";
 // components
 import Login from "../components/Login";
 import Register from "../components/Register";
+import Contact from "../components/Contact";
 
 // redux
 import { useSelector } from "react-redux";
@@ -16,7 +17,7 @@ const Home = () => {
   // console.log(users);
 
   if (users.user?._id.length !== 0) {
-    return <Box>Ich bin eingelogget yay!</Box>;
+    return <Contact />;
   }
   return (
     <Box

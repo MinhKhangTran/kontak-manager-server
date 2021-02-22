@@ -24,13 +24,15 @@ const Navbar = () => {
         </Heading>
         <Spacer />
         {users && users.user?._id.length !== 0 && (
-          <Text fontSize="2xl">Hi {users.user.email.split("@")[0]}</Text>
+          <Text fontSize={{ base: "lg", md: "2xl" }}>
+            Hi {users.user.email.split("@")[0]}
+          </Text>
         )}
 
         {users && users.user?._id.length !== 0 && (
           <Button
             onClick={() => logoutHandler()}
-            fontSize="2xl"
+            fontSize={{ base: "lg", md: "2xl" }}
             colorScheme="teal"
             ml={4}
             variant="ghost"
