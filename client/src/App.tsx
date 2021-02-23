@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
+import ContactEdit from "./components/ContactEdit";
 
 // Layout
 import Layout from "./components/Layout";
@@ -14,6 +15,9 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Home />
+          </Route>
+          <Route path="/edit/:id">
+            <ContactEdit />
           </Route>
         </Switch>
       </Layout>
